@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,25 +8,61 @@
     <link rel="stylesheet" href="style.css">
     <title>What 2 Watch</title>
 </head>
+
 <body>
 
     <div class="container">
-        <div class="search-container">
-            <div class="input-wrap">
-                <input type="text" id="movie-name" placeholder="Insira sua pesquisa" value="Power Rangers" autocomplete="off">
-                <div id="suggestions" class="suggestions" aria-hidden="true"></div>
+        <main class="main-content">
+            <div class="search-container">
+                <div class="input-wrap">
+                    <input type="text" id="movie-name" placeholder="Insira sua pesquisa" value="Power Rangers"
+                        autocomplete="off">
+                    <div id="suggestions" class="suggestions" aria-hidden="true"></div>
+                </div>
+                <button id="search-button" aria-label="Pesquisar">
+                    <span id="btn-text">Pesquisar</span>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span id="btn-spinner" class="spinner hidden" aria-hidden="true"></span>
+                </button>
             </div>
-            <button id="search-button" aria-label="Pesquisar">
-                <span id="btn-text">Pesquisar</span>
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span id="btn-spinner" class="spinner hidden" aria-hidden="true"></span>
-            </button>
-        </div>
-        <div id="result"></div>
+            <div id="result"></div>
+        </main>
+
+        <aside id="sidebar" class="sidebar" aria-label="Painel lateral">
+            <section class="panel recent">
+                <div class="panel-head">
+                    <h4>Últimas pesquisas</h4>
+                    <button id="clear-recent" class="small-link" title="Limpar últimas pesquisas">Limpar</button>
+                </div>
+                <ul id="recent-list" class="list" aria-live="polite"></ul>
+            </section>
+
+            <section class="panel favorites">
+                <div class="panel-head">
+                    <h4>Favoritos</h4>
+                </div>
+                <ul id="favorites-list" class="list" aria-live="polite"></ul>
+            </section>
+
+            <section class="panel watched">
+                <div class="panel-head">
+                    <h4>Assistidos</h4>
+                </div>
+                <ul id="watched-list" class="list" aria-live="polite"></ul>
+            </section>
+        </aside>
     </div>
 
-    <script src="config.js"></script>
     <script src="index.js"></script>
     <script src="https://kit.fontawesome.com/ede49b7a42.js" crossorigin="anonymous"></script>
+    <!-- Modal para detalhes completos -->
+    <div id="modal" class="modal" aria-hidden="true">
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button id="modal-close" class="icon-btn" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
 </body>
+
 </html>
