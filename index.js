@@ -289,6 +289,13 @@ let getMovie = async () => {
         // use serverless proxy to avoid exposing API key
         const searchURL = `/api/tmdb?endpoint=search/movie&query=${encodeURIComponent(movieName)}&include_adult=false&page=1`;
         const searchResponse = await fetch(searchURL);
+        if (!searchResponse.ok) {
+            const text = await searchResponse.text();
+            console.error('tmdb proxy search error', searchResponse.status, text);
+            result.innerHTML = `<h3 class="msg">Erro ao consultar a API (status ${searchResponse.status}). Tente novamente mais tarde.</h3>`;
+            setBtnLoading(false);
+            return;
+        }
         const searchData = await searchResponse.json();
 
         if (!searchData.results || searchData.results.length === 0) {
@@ -310,9 +317,17 @@ let getMovie = async () => {
             fetch(videosUrl)
         ]);
 
+        if (!detailsResp.ok) {
+            const errText = await detailsResp.text();
+            console.error('details fetch error', detailsResp.status, errText);
+            result.innerHTML = `<h3 class="msg">Erro ao obter detalhes do filme (status ${detailsResp.status}).</h3>`;
+            setBtnLoading(false);
+            return;
+        }
+
         const details = await detailsResp.json();
-        const credits = await creditsResp.json();
-        const videos = await videosResp.json();
+        const credits = creditsResp.ok ? await creditsResp.json() : { cast: [], crew: [] };
+        const videos = videosResp.ok ? await videosResp.json() : { results: [] };
 
         const poster = details.poster_path ? `https://image.tmdb.org/t/p/w500${details.poster_path}` : 'placeholder.png';
         const titulo = details.title || details.original_title || movie.title;

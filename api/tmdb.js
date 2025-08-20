@@ -3,8 +3,6 @@
 // Expects a query parameter `endpoint`, for example: endpoint=search/movie&query=Inception
 // The function forwards any other query parameters to TMDB and forces language=pt-BR
 
-const fetch = require('node-fetch');
-
 module.exports = async (req, res) => {
   try {
     const { endpoint } = req.query || {};
@@ -28,22 +26,26 @@ module.exports = async (req, res) => {
     // prefer pt-BR unless caller overrides
     if (!url.searchParams.has('language')) url.searchParams.set('language', 'pt-BR');
 
+    // use global fetch (Node 18+ / Vercel runtime)
     const resp = await fetch(url.toString());
-    const contentType = resp.headers.get('content-type') || '';
-    const body = await resp.text();
+    const contentType = (resp.headers.get('content-type') || '').toLowerCase();
 
-    // forward status and body
+    // try to parse JSON when possible
     if (contentType.includes('application/json')) {
-      try {
-        return res.status(resp.status).json(JSON.parse(body));
-      } catch (e) {
-        return res.status(resp.status).send(body);
-      }
+      const json = await resp.json();
+      return res.status(resp.status).json(json);
     }
 
-    return res.status(resp.status).send(body);
+    // otherwise return text (for images or plain text)
+    const text = await resp.text();
+    // if upstream returned error HTML, normalize to JSON for client
+    if (!resp.ok) {
+      return res.status(resp.status).json({ error: `upstream error`, status: resp.status, body: text });
+    }
+    res.setHeader('content-type', contentType || 'text/plain');
+    return res.status(resp.status).send(text);
   } catch (err) {
     console.error('tmdb proxy error', err);
-    return res.status(500).json({ error: 'internal server error' });
+    return res.status(500).json({ error: 'internal server error', detail: String(err && err.message) });
   }
 };
