@@ -14,6 +14,10 @@
     <header class="app-header" role="banner">
         <div class="inner">
             <a class="brand" href="/">What 2 Watch</a>
+            <nav class="nav" role="navigation" aria-label="Navegação principal">
+                <a href="/">Home</a>
+                <a href="/search.html" class="active">Pesquisar</a>
+            </nav>
             <div class="header-actions">
                 <a id="favorites-link" href="#" title="Favoritos" aria-label="Favoritos">
                     <i class="fa-solid fa-heart"></i>
@@ -21,10 +25,6 @@
                 </a>
                 <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
             </div>
-            <nav class="nav" role="navigation" aria-label="Navegação principal">
-                <a href="/">Home</a>
-                <a href="/search.html" class="active">Pesquisar</a>
-            </nav>
         </div>
     </header>
 
@@ -33,7 +33,7 @@
         <main class="main-content">
             <div class="search-container">
                 <div class="input-wrap">
-                    <input type="text" id="movie-name" placeholder="Insira sua pesquisa" value="Power Rangers"
+                    <input type="text" id="movie-name" placeholder="Insira sua pesquisa" value=""
                         autocomplete="off">
                     <div id="suggestions" class="suggestions" aria-hidden="true"></div>
                 </div>
@@ -71,8 +71,6 @@
         </aside>
     </div>
 
-    <script src="index.js"></script>
-    <script src="https://kit.fontawesome.com/ede49b7a42.js" crossorigin="anonymous"></script>
     <!-- Modal para detalhes completos -->
     <div id="modal" class="modal" aria-hidden="true">
         <div class="modal-backdrop" id="modal-backdrop"></div>
@@ -81,6 +79,9 @@
             <div id="modal-content"></div>
         </div>
     </div>
+
+    <script src="index.js"></script>
+    <script src="https://kit.fontawesome.com/ede49b7a42.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
