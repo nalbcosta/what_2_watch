@@ -1,13 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="What 2 Watch logo">
   <defs>
     <linearGradient id="g" x1="0" x2="1">
       <stop offset="0" stop-color="#5b00d1"/>
       <stop offset="1" stop-color="#30006a"/>
     </linearGradient>
   </defs>
-  <rect width="100%" height="100%" rx="12" fill="url(#g)"/>
-  <g transform="translate(10,10)" fill="#fff">
-    <path d="M22 2c-6 0-11 5-11 11s5 11 11 11 11-5 11-11S28 2 22 2zm0 18c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7z"/>
-    <rect x="2" y="26" width="28" height="6" rx="3"/>
+
+  <!-- background rounded -->
+  <rect width="128" height="128" rx="22" fill="url(#g)" />
+
+  <!-- base (claquete body) -->
+  <rect x="18" y="46" width="92" height="56" rx="8" fill="#ffffff" />
+
+  <!-- clapper top slats (simple, rounded rects rotated slightly) -->
+  <g fill="#f3f3f3">
+    <rect x="20" y="28" width="28" height="12" rx="3" transform="rotate(-12 34 34)"/>
+    <rect x="46" y="26" width="28" height="12" rx="3" transform="rotate(-4 60 32)"/>
+    <rect x="72" y="25" width="28" height="12" rx="3" transform="rotate(6 86 31)"/>
   </g>
+
+  <!-- play triangle (centered inside the white base) -->
+  <polygon points="60,60 60,92 92,76" fill="#5b00d1" />
+
+  <!-- subtle outline for legibility -->
+  <rect x="18" y="46" width="92" height="56" rx="8" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="2"/>
 </svg>

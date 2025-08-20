@@ -7,24 +7,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <meta name="description" content="What 2 Watch — encontre filmes, veja sinopse, elenco e trailers. Salve favoritos e marque assistidos.">
+    <meta name="description"
+        content="What 2 Watch — encontre filmes, veja sinopse, elenco e trailers. Salve favoritos e marque assistidos.">
     <meta name="keywords" content="filmes, assistir, descobrir, TMDB, favoritos">
     <meta name="author" content="What 2 Watch">
     <meta property="og:title" content="What 2 Watch">
-    <meta property="og:description" content="Encontre filmes rapidamente. Busque por título, veja sinopse, elenco e trailer.">
+    <meta property="og:description"
+        content="Encontre filmes rapidamente. Busque por título, veja sinopse, elenco e trailer.">
     <meta property="og:image" content="/favicon.svg">
     <meta property="og:url" content="https://what-2-watch-gamma.vercel.app/">
     <meta name="twitter:card" content="summary_large_image">
     <title>What 2 Watch</title>
     <style>
-        /* Quick landing overrides */
-        .hero{ display:flex; align-items:center; justify-content:space-between; gap:2rem; padding:3rem; }
-        .hero .copy{ max-width:640px; }
-        .hero h1{ font-size:2.4rem; margin-bottom:0.6rem; color:#fff }
-        .hero p{ color: #efe8ff; font-size:1.05rem }
-        .cta{ margin-top:1.2rem }
-        .cta a{ display:inline-block; padding:0.9rem 1.2rem; background: linear-gradient(90deg,#5b00d1,#30006a); color:#fff; border-radius:0.6rem; text-decoration:none; font-weight:600 }
-        .screenshot{ width:360px; border-radius:0.8rem; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
+        /* Landing overrides */
+        :root {
+            --brand-1: #5b00d1;
+            --brand-2: #30006a;
+        }
+
+        header.site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 2rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #fff;
+            text-decoration: none
+        }
+
+        .brand img {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35)
+        }
+
+        nav.header-nav a {
+            color: rgba(255, 255, 255, 0.9);
+            margin-left: 1.2rem;
+            text-decoration: none;
+            font-weight: 600
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        .hero .copy {
+            max-width: 680px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.6rem;
+            color: #fff;
+            line-height: 1.03
+        }
+
+        .hero p {
+            color: #efe8ff;
+            font-size: 1.05rem;
+            margin-bottom: 1rem
+        }
+
+        .cta {
+            margin-top: 1rem
+        }
+
+        .cta a {
+            display: inline-block;
+            padding: 0.9rem 1.4rem;
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            color: #fff;
+            border-radius: 0.6rem;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 8px 26px rgba(91, 0, 209, 0.22)
+        }
+
+        .screenshot {
+            width: 360px;
+            max-width: 38%;
+            border-radius: 1rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            padding: 2rem
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin-top: 2rem
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.1rem;
+            border-radius: 0.8rem;
+            color: #f0eefe
+        }
+
+        .feature h4 {
+            margin: 0 0 0.4rem 0;
+            font-size: 1.02rem
+        }
+
+        .feature p {
+            margin: 0;
+            color: #e9e1ff;
+            opacity: 0.9;
+            font-size: 0.95rem
+        }
+
+        footer.site-footer {
+            margin-top: 3rem;
+            padding: 2rem;
+            color: #dcd2ff;
+            border-top: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        @media (max-width:980px) {
+            .hero {
+                flex-direction: column;
+                padding: 2.2rem
+            }
+
+            .screenshot {
+                max-width: 320px;
+                width: 58%
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media (max-width:600px) {
+            .features {
+                grid-template-columns: 1fr
+            }
+
+            nav.header-nav {
+                display: none
+            }
+        }
     </style>
 </head>
 
@@ -32,22 +168,66 @@
 
     <div class="container" style="grid-template-columns: 1fr;">
         <main class="main-content" style="background: transparent; box-shadow:none;">
+            <header class="site-header">
+                <a class="brand" href="/">
+                    <img src="/favicon.svg" alt="What 2 Watch logo">
+                    <div>
+                        <div style="font-weight:700; font-size:1.05rem; color:#fff">What 2 Watch</div>
+                        <div style="font-size:0.78rem; color:rgba(255,255,255,0.75)">Descubra o que assistir</div>
+                    </div>
+                </a>
+                <nav class="header-nav">
+                    <a href="/search.html">Pesquisar</a>
+                    <a href="#features">Recursos</a>
+                    <a href="#">Sobre</a>
+                </nav>
+            </header>
+
             <section class="hero">
                 <div class="copy">
-                    <h1>What 2 Watch</h1>
-                    <p>Encontre filmes rapidamente. Busque por título, veja sinopse, elenco, trailer e salve nos favoritos. Uma interface simples para descobrir o que assistir hoje.</p>
-                    <div class="cta"><a href="/search.html">Ir para a pesquisa</a></div>
+                    <h1>Encontre o filme perfeito pra hoje</h1>
+                    <p>Busque por título, explore recomendações, veja sinopse, elenco e trailers. Salve favoritos e
+                        marque o que já assistiu — tudo rápido e em português.</p>
+                    <div class="cta"><a href="/search.html">Começar a buscar</a></div>
+
+                    <div class="features" id="features">
+                        <div class="feature">
+                            <h4>Busca instantânea</h4>
+                            <p>Sugestões enquanto digita para achar títulos mais rápido.</p>
+                        </div>
+                        <div class="feature">
+                            <h4>Detalhes completos</h4>
+                            <p>Sinopse, elenco, notas e trailers direto do TMDB em pt-BR.</p>
+                        </div>
+                        <div class="feature">
+                            <h4>Favoritos e histórico</h4>
+                            <p>Guarde títulos e marque como assistidos no seu navegador.</p>
+                        </div>
+                    </div>
                 </div>
-                <img class="screenshot" src="favicon.svg" alt="preview">
+
+                <div class="screenshot" aria-hidden="true">
+                    <img src="/preview.png" alt="preview"
+                        style="width:100%; height:auto; display:block; border-radius:12px;">
+                </div>
             </section>
-            <section style="margin-top:1.4rem;">
+
+            <section style="margin-top:1.6rem;">
                 <h3 style="color:#fff">Como funciona</h3>
                 <ul style="color:#efe8ff;margin-top:0.6rem;line-height:1.6">
-                    <li>Pesquisar por título (sugestões enquanto digita)</li>
-                    <li>Ver detalhes, elenco e trailer</li>
+                    <li>Pesquisar por título (com sugestões em tempo real)</li>
+                    <li>Ver sinopse, elenco e trailer</li>
                     <li>Salvar nos Favoritos e marcar como Assistido</li>
                 </ul>
             </section>
+
+            <footer class="site-footer">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+                    <div>© <strong>What 2 Watch</strong> — Feito com dados do TMDB</div>
+                    <div style="opacity:0.9">Contato: <a href="mailto:you@example.com"
+                            style="color:inherit; text-decoration:underline;">you@example.com</a></div>
+                </div>
+            </footer>
         </main>
     </div>
 
