@@ -1,6 +1,7 @@
 let movieNameRef = document.getElementById('movie-name');
 let searchButton = document.getElementById('search-button');
 let result = document.getElementById('result');
+const API_KEY = config.API_KEY;
 
 let getMovie = () =>{
     let movieName = movieNameRef.value;
