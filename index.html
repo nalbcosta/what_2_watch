@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +11,15 @@
 
     <div class="container">
         <div class="search-container">
-            <input type="text" id="movie-name" placeholder="Insira sua pesquisa" value="Power Rangers">
-            <button id="search-button">Pesquisar</button>
+            <div class="input-wrap">
+                <input type="text" id="movie-name" placeholder="Insira sua pesquisa" value="Power Rangers" autocomplete="off">
+                <div id="suggestions" class="suggestions" aria-hidden="true"></div>
+            </div>
+            <button id="search-button" aria-label="Pesquisar">
+                <span id="btn-text">Pesquisar</span>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span id="btn-spinner" class="spinner hidden" aria-hidden="true"></span>
+            </button>
         </div>
         <div id="result"></div>
     </div>
