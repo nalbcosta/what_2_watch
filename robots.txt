@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://what-2-watch-gamma.vercel.app/sitemap.xml

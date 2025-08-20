@@ -24,6 +24,12 @@ body {
 
 .main-content {
     min-width: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.02) 100%);
+    padding: 1.2rem;
+    border-radius: 0.8em;
+    box-shadow: 0 12px 40px rgba(10, 4, 18, 0.18);
+    min-height: 320px;
+    /* garante espaço inicial */
 }
 
 .sidebar {
@@ -83,14 +89,17 @@ body {
 }
 
 .list .meta {
-    font-size: 0.9rem;
-    color: #27003b;
+    flex: 1 1 auto;
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 0.9rem;
+    color: #27003b;
 }
 
 .list .actions {
+    flex: 0 0 auto;
     display: flex;
     gap: 0.4rem;
 }
@@ -365,6 +374,11 @@ body {
 
 #result {
     color: black;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%);
+    padding: 1.2rem;
+    border-radius: 0.6em;
+    margin-top: 1rem;
+    box-shadow: inset 0 -6px 30px rgba(39, 0, 59, 0.02);
 }
 
 .info {
@@ -641,4 +655,142 @@ p {
 .suggestions {
     opacity: 0;
     transform: translateY(-6px);
+}
+
+/* ===== Header / Navbar ===== */
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(18, 2, 36, 0.6), rgba(18, 2, 36, 0.4));
+    padding: 0.6rem 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.app-header .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.brand {
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.05rem;
+}
+
+.nav a {
+    color: #d9cffb;
+    text-decoration: none;
+    margin-left: 0.9rem;
+    padding: 0.45rem 0.6rem;
+    border-radius: 0.45rem;
+}
+
+.nav a.active,
+.nav a:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
+}
+
+/* ===== Mobile hamburger menu ===== */
+.nav-toggle{ display:none; background:transparent; border:none; color:#fff; font-size:1.2rem; }
+
+@media screen and (max-width:600px){
+    .nav{ position: fixed; top:56px; right:0.6rem; background: rgba(18,2,36,0.98); border-radius:0.6em; padding:0.6rem; box-shadow:0 12px 30px rgba(0,0,0,0.4); opacity:0; transform: translateY(-8px) scale(0.99); transition: opacity 180ms ease, transform 180ms ease; pointer-events:none; z-index:220; min-width:160px; }
+    .nav a{ display:block; margin:0.2rem 0; color:#fff; padding:0.45rem 0.6rem; }
+    .nav.open{ opacity:1; transform: translateY(0) scale(1); pointer-events:auto; }
+    .nav-toggle{ display:inline-block; }
+    .nav-backdrop{ position: fixed; inset:0; background: rgba(0,0,0,0.35); z-index:210; }
+}
+
+/* suggestions above input */
+.suggestions.above{ top: auto; bottom: calc(100% + 0.6em); transform-origin: bottom left; }
+
+/* ===== Responsividade aprimorada para tablet e mobile ===== */
+
+/* Tablet: entre 600px e 980px */
+@media screen and (max-width: 980px) and (min-width: 601px) {
+    .container {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    .main-content {
+        padding: 1rem;
+        border-radius: 0.6em;
+    }
+    #movie-name { height:44px; font-size:0.98rem; }
+    #search-button { height:44px; min-width:110px; }
+    .poster { width:120px; height:180px; }
+    .info { gap:0.8rem; }
+}
+
+/* Mobile: até 600px */
+@media screen and (max-width: 600px) {
+    body { background: linear-gradient(180deg, rgba(39,0,59,1) 0%, rgba(82,0,194,1) 100%); }
+    .container { padding: 0.9rem; gap: 0.9rem; }
+
+    /* header already responsive; make brand smaller */
+    .brand { font-size: 0.98rem; }
+
+    /* Stack the search vertically */
+    .search-container { flex-direction: column; align-items: stretch; }
+    .input-wrap { order: 0; }
+    #movie-name { width:100%; height:48px; font-size:0.98rem; }
+    #search-button { width:100%; height:48px; min-width:unset; margin-top:0.6rem; }
+
+    /* Suggestions should expand to full width and be on top of other content */
+    .suggestions { position: absolute; left: 0; right: 0; top: calc(100% + 0.4em); max-height: 220px; }
+
+    /* Sidebar becomes horizontal blocks after main - handled by grid change earlier */
+    .sidebar { position: relative; top: 0; }
+
+    /* Reduce spacing and sizes in content */
+    .main-content { padding: 0.9rem; }
+    #result { padding: 0.9rem; }
+
+    .poster { width: 96px; height: 140px; }
+    .info { flex-direction: column; gap: 0.6rem; }
+
+    h2 { font-size: 1.05rem; text-align:left; }
+    p { font-size: 0.92rem; }
+
+    /* Modal full screen on mobile */
+    .modal-panel { width: calc(100% - 1.2rem); max-width: 100%; max-height: calc(100vh - 2rem); border-radius: 0.6em; }
+    #modal-content .modal-header img { width: 110px; height: 160px; }
+
+    /* Adjust lists to be thumb-friendly */
+    .list { max-height: 200px; }
+    .list li { padding: 0.5rem; }
+
+    /* Ensure controls are reachable with touch */
+    .controls .icon-btn, .icon-btn { padding: 0.55rem 0.7rem; }
+}
+
+/* Very small screens: make font a bit smaller to keep layout */
+@media screen and (max-width: 360px) {
+    #movie-name { font-size: 0.92rem; }
+    #btn-text { font-size: 0.92rem; }
+    .brand { font-size: 0.95rem; }
+}
+
+/* Improve focus visible on small devices */
+@media (pointer: coarse) {
+    #search-button:focus, #movie-name:focus { outline: 3px solid rgba(82,0,194,0.14); }
+}
+
+/* End responsivity improvements */
+
+/* header actions (favorites badge) */
+.header-actions{ display:flex; align-items:center; gap:0.6rem; }
+.header-actions a{ color:#fff; text-decoration:none; position:relative; display:inline-flex; align-items:center; padding:0.2rem 0.4rem; }
+.badge{ position:absolute; top:-6px; right:-6px; background:#ff4d6d; color:#fff; font-size:0.72rem; padding:0.18rem 0.4rem; border-radius:999px; font-weight:700; }
+
+@media screen and (max-width:600px){
+    .header-actions a{ padding:0.15rem; }
+    .badge{ top:-4px; right:-4px; }
 }

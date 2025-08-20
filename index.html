@@ -6,63 +6,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <meta name="description" content="What 2 Watch — encontre filmes, veja sinopse, elenco e trailers. Salve favoritos e marque assistidos.">
+    <meta name="keywords" content="filmes, assistir, descobrir, TMDB, favoritos">
+    <meta name="author" content="What 2 Watch">
+    <meta property="og:title" content="What 2 Watch">
+    <meta property="og:description" content="Encontre filmes rapidamente. Busque por título, veja sinopse, elenco e trailer.">
+    <meta property="og:image" content="/favicon.svg">
+    <meta property="og:url" content="https://what-2-watch-gamma.vercel.app/">
+    <meta name="twitter:card" content="summary_large_image">
     <title>What 2 Watch</title>
+    <style>
+        /* Quick landing overrides */
+        .hero{ display:flex; align-items:center; justify-content:space-between; gap:2rem; padding:3rem; }
+        .hero .copy{ max-width:640px; }
+        .hero h1{ font-size:2.4rem; margin-bottom:0.6rem; color:#fff }
+        .hero p{ color: #efe8ff; font-size:1.05rem }
+        .cta{ margin-top:1.2rem }
+        .cta a{ display:inline-block; padding:0.9rem 1.2rem; background: linear-gradient(90deg,#5b00d1,#30006a); color:#fff; border-radius:0.6rem; text-decoration:none; font-weight:600 }
+        .screenshot{ width:360px; border-radius:0.8rem; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
+    </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <main class="main-content">
-            <div class="search-container">
-                <div class="input-wrap">
-                    <input type="text" id="movie-name" placeholder="Insira sua pesquisa" value="Power Rangers"
-                        autocomplete="off">
-                    <div id="suggestions" class="suggestions" aria-hidden="true"></div>
+    <div class="container" style="grid-template-columns: 1fr;">
+        <main class="main-content" style="background: transparent; box-shadow:none;">
+            <section class="hero">
+                <div class="copy">
+                    <h1>What 2 Watch</h1>
+                    <p>Encontre filmes rapidamente. Busque por título, veja sinopse, elenco, trailer e salve nos favoritos. Uma interface simples para descobrir o que assistir hoje.</p>
+                    <div class="cta"><a href="/search.html">Ir para a pesquisa</a></div>
                 </div>
-                <button id="search-button" aria-label="Pesquisar">
-                    <span id="btn-text">Pesquisar</span>
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <span id="btn-spinner" class="spinner hidden" aria-hidden="true"></span>
-                </button>
-            </div>
-            <div id="result"></div>
+                <img class="screenshot" src="star.svg" alt="preview">
+            </section>
+            <section style="margin-top:1.4rem;">
+                <h3 style="color:#fff">Como funciona</h3>
+                <ul style="color:#efe8ff;margin-top:0.6rem;line-height:1.6">
+                    <li>Pesquisar por título (sugestões enquanto digita)</li>
+                    <li>Ver detalhes, elenco e trailer</li>
+                    <li>Salvar nos Favoritos e marcar como Assistido</li>
+                </ul>
+            </section>
         </main>
-
-        <aside id="sidebar" class="sidebar" aria-label="Painel lateral">
-            <section class="panel recent">
-                <div class="panel-head">
-                    <h4>Últimas pesquisas</h4>
-                    <button id="clear-recent" class="small-link" title="Limpar últimas pesquisas">Limpar</button>
-                </div>
-                <ul id="recent-list" class="list" aria-live="polite"></ul>
-            </section>
-
-            <section class="panel favorites">
-                <div class="panel-head">
-                    <h4>Favoritos</h4>
-                </div>
-                <ul id="favorites-list" class="list" aria-live="polite"></ul>
-            </section>
-
-            <section class="panel watched">
-                <div class="panel-head">
-                    <h4>Assistidos</h4>
-                </div>
-                <ul id="watched-list" class="list" aria-live="polite"></ul>
-            </section>
-        </aside>
     </div>
 
-    <script src="index.js"></script>
-    <script src="https://kit.fontawesome.com/ede49b7a42.js" crossorigin="anonymous"></script>
-    <!-- Modal para detalhes completos -->
-    <div id="modal" class="modal" aria-hidden="true">
-        <div class="modal-backdrop" id="modal-backdrop"></div>
-        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-            <button id="modal-close" class="icon-btn" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
-            <div id="modal-content"></div>
-        </div>
-    </div>
 </body>
 
 </html>

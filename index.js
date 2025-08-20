@@ -113,6 +113,26 @@ const renderFavorites = () => {
     });
 };
 
+// sync favorites badge in header
+const favBadgeEl = document.getElementById('fav-badge');
+const favoritesLink = document.getElementById('favorites-link');
+const updateFavBadge = () => {
+    if(!favBadgeEl) return;
+    favBadgeEl.textContent = String(favorites.length || 0);
+};
+
+if(favoritesLink){
+    favoritesLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        // focus sidebar favorites by scrolling into view
+        const el = document.getElementById('favorites-list');
+        if(el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+}
+
+// call after render
+updateFavBadge();
+
 const renderWatched = () => {
     if (!watchedListEl) return;
     watchedListEl.innerHTML = '';
@@ -242,6 +262,69 @@ movieNameRef.addEventListener('keydown', (e) => {
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.input-wrap')) clearSuggestions();
 });
+
+// NAV TOGGLE (mobile)
+const navToggle = document.getElementById('nav-toggle');
+const navEl = document.querySelector('.nav');
+if(navToggle && navEl){
+    navToggle.addEventListener('click', () => {
+        const open = navEl.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', String(open));
+    });
+}
+
+// menu backdrop and close-on-outside
+let navBackdropEl = null;
+const openNav = () => {
+    navEl.classList.add('open');
+    navToggle.setAttribute('aria-expanded','true');
+    if(!navBackdropEl){
+        navBackdropEl = document.createElement('div');
+        navBackdropEl.className = 'nav-backdrop';
+        document.body.appendChild(navBackdropEl);
+        navBackdropEl.addEventListener('click', closeNav);
+    }
+};
+const closeNav = () => {
+    if(!navEl) return;
+    navEl.classList.remove('open');
+    if(navToggle) navToggle.setAttribute('aria-expanded','false');
+    if(navBackdropEl){
+        navBackdropEl.removeEventListener('click', closeNav);
+        document.body.removeChild(navBackdropEl);
+        navBackdropEl = null;
+    }
+};
+
+if(navToggle){
+    navToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if(navEl.classList.contains('open')) closeNav(); else openNav();
+    });
+}
+
+// close nav on escape or resize to desktop
+document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeNav(); });
+window.addEventListener('resize', () => { if(window.innerWidth > 600) closeNav(); });
+
+// Adjust suggestions to show above input if there's not enough space below
+const adjustSuggestionsPosition = () => {
+    const wrap = document.querySelector('.input-wrap');
+    const box = suggestionsBox;
+    if(!wrap || !box) return;
+    const rect = wrap.getBoundingClientRect();
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const needed = Math.min(300, box.scrollHeight || 200);
+    if(spaceBelow < needed + 20){
+        box.classList.add('above');
+    } else {
+        box.classList.remove('above');
+    }
+};
+
+movieNameRef.addEventListener('focus', adjustSuggestionsPosition);
+window.addEventListener('resize', adjustSuggestionsPosition);
+window.addEventListener('scroll', adjustSuggestionsPosition, true);
 
 // show skeleton while loading details
 const showSkeleton = () => {
